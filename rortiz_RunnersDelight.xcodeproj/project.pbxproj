@@ -1,0 +1,582 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		94A07C102E396561009D719E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 94A07BF32E39655D009D719E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 94A07BFA2E39655D009D719E;
+			remoteInfo = rortiz_RunnersDelight;
+		};
+		94A07C1A2E396561009D719E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 94A07BF32E39655D009D719E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 94A07BFA2E39655D009D719E;
+			remoteInfo = rortiz_RunnersDelight;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		94A07BFB2E39655D009D719E /* rortiz_RunnersDelight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rortiz_RunnersDelight.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		94A07C0F2E396561009D719E /* rortiz_RunnersDelightTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = rortiz_RunnersDelightTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		94A07C192E396561009D719E /* rortiz_RunnersDelightUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = rortiz_RunnersDelightUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		94A07C212E396561009D719E /* Exceptions for "rortiz_RunnersDelight" folder in "rortiz_RunnersDelight" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 94A07BFA2E39655D009D719E /* rortiz_RunnersDelight */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		94A07BFD2E39655D009D719E /* rortiz_RunnersDelight */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				94A07C212E396561009D719E /* Exceptions for "rortiz_RunnersDelight" folder in "rortiz_RunnersDelight" target */,
+			);
+			path = rortiz_RunnersDelight;
+			sourceTree = "<group>";
+		};
+		94A07C122E396561009D719E /* rortiz_RunnersDelightTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = rortiz_RunnersDelightTests;
+			sourceTree = "<group>";
+		};
+		94A07C1C2E396561009D719E /* rortiz_RunnersDelightUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = rortiz_RunnersDelightUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		94A07BF82E39655D009D719E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		94A07C0C2E396561009D719E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		94A07C162E396561009D719E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		94A07BF22E39655D009D719E = {
+			isa = PBXGroup;
+			children = (
+				94A07BFD2E39655D009D719E /* rortiz_RunnersDelight */,
+				94A07C122E396561009D719E /* rortiz_RunnersDelightTests */,
+				94A07C1C2E396561009D719E /* rortiz_RunnersDelightUITests */,
+				94A07BFC2E39655D009D719E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		94A07BFC2E39655D009D719E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				94A07BFB2E39655D009D719E /* rortiz_RunnersDelight.app */,
+				94A07C0F2E396561009D719E /* rortiz_RunnersDelightTests.xctest */,
+				94A07C192E396561009D719E /* rortiz_RunnersDelightUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		94A07BFA2E39655D009D719E /* rortiz_RunnersDelight */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 94A07C222E396561009D719E /* Build configuration list for PBXNativeTarget "rortiz_RunnersDelight" */;
+			buildPhases = (
+				94A07BF72E39655D009D719E /* Sources */,
+				94A07BF82E39655D009D719E /* Frameworks */,
+				94A07BF92E39655D009D719E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				94A07BFD2E39655D009D719E /* rortiz_RunnersDelight */,
+			);
+			name = rortiz_RunnersDelight;
+			packageProductDependencies = (
+			);
+			productName = rortiz_RunnersDelight;
+			productReference = 94A07BFB2E39655D009D719E /* rortiz_RunnersDelight.app */;
+			productType = "com.apple.product-type.application";
+		};
+		94A07C0E2E396561009D719E /* rortiz_RunnersDelightTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 94A07C272E396561009D719E /* Build configuration list for PBXNativeTarget "rortiz_RunnersDelightTests" */;
+			buildPhases = (
+				94A07C0B2E396561009D719E /* Sources */,
+				94A07C0C2E396561009D719E /* Frameworks */,
+				94A07C0D2E396561009D719E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				94A07C112E396561009D719E /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				94A07C122E396561009D719E /* rortiz_RunnersDelightTests */,
+			);
+			name = rortiz_RunnersDelightTests;
+			packageProductDependencies = (
+			);
+			productName = rortiz_RunnersDelightTests;
+			productReference = 94A07C0F2E396561009D719E /* rortiz_RunnersDelightTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		94A07C182E396561009D719E /* rortiz_RunnersDelightUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 94A07C2A2E396561009D719E /* Build configuration list for PBXNativeTarget "rortiz_RunnersDelightUITests" */;
+			buildPhases = (
+				94A07C152E396561009D719E /* Sources */,
+				94A07C162E396561009D719E /* Frameworks */,
+				94A07C172E396561009D719E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				94A07C1B2E396561009D719E /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				94A07C1C2E396561009D719E /* rortiz_RunnersDelightUITests */,
+			);
+			name = rortiz_RunnersDelightUITests;
+			packageProductDependencies = (
+			);
+			productName = rortiz_RunnersDelightUITests;
+			productReference = 94A07C192E396561009D719E /* rortiz_RunnersDelightUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		94A07BF32E39655D009D719E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					94A07BFA2E39655D009D719E = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					94A07C0E2E396561009D719E = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 94A07BFA2E39655D009D719E;
+					};
+					94A07C182E396561009D719E = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 94A07BFA2E39655D009D719E;
+					};
+				};
+			};
+			buildConfigurationList = 94A07BF62E39655D009D719E /* Build configuration list for PBXProject "rortiz_RunnersDelight" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 94A07BF22E39655D009D719E;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 94A07BFC2E39655D009D719E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				94A07BFA2E39655D009D719E /* rortiz_RunnersDelight */,
+				94A07C0E2E396561009D719E /* rortiz_RunnersDelightTests */,
+				94A07C182E396561009D719E /* rortiz_RunnersDelightUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		94A07BF92E39655D009D719E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		94A07C0D2E396561009D719E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		94A07C172E396561009D719E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		94A07BF72E39655D009D719E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		94A07C0B2E396561009D719E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		94A07C152E396561009D719E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		94A07C112E396561009D719E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 94A07BFA2E39655D009D719E /* rortiz_RunnersDelight */;
+			targetProxy = 94A07C102E396561009D719E /* PBXContainerItemProxy */;
+		};
+		94A07C1B2E396561009D719E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 94A07BFA2E39655D009D719E /* rortiz_RunnersDelight */;
+			targetProxy = 94A07C1A2E396561009D719E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		94A07C232E396561009D719E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = rortiz_RunnersDelight/rortiz_RunnersDelight.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"rortiz_RunnersDelight/Preview Content\"";
+				DEVELOPMENT_TEAM = 6ARNSV67VJ;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = rortiz_RunnersDelight/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "\"We use your location to track your runs.\"";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rortiz.rortiz-RunnersDelight";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		94A07C242E396561009D719E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = rortiz_RunnersDelight/rortiz_RunnersDelight.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"rortiz_RunnersDelight/Preview Content\"";
+				DEVELOPMENT_TEAM = 6ARNSV67VJ;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = rortiz_RunnersDelight/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "\"We use your location to track your runs.\"";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rortiz.rortiz-RunnersDelight";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		94A07C252E396561009D719E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		94A07C262E396561009D719E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		94A07C282E396561009D719E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6ARNSV67VJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rortiz.rortiz-RunnersDelightTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/rortiz_RunnersDelight.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/rortiz_RunnersDelight";
+			};
+			name = Debug;
+		};
+		94A07C292E396561009D719E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6ARNSV67VJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rortiz.rortiz-RunnersDelightTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/rortiz_RunnersDelight.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/rortiz_RunnersDelight";
+			};
+			name = Release;
+		};
+		94A07C2B2E396561009D719E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6ARNSV67VJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rortiz.rortiz-RunnersDelightUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = rortiz_RunnersDelight;
+			};
+			name = Debug;
+		};
+		94A07C2C2E396561009D719E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6ARNSV67VJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rortiz.rortiz-RunnersDelightUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = rortiz_RunnersDelight;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		94A07BF62E39655D009D719E /* Build configuration list for PBXProject "rortiz_RunnersDelight" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				94A07C252E396561009D719E /* Debug */,
+				94A07C262E396561009D719E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		94A07C222E396561009D719E /* Build configuration list for PBXNativeTarget "rortiz_RunnersDelight" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				94A07C232E396561009D719E /* Debug */,
+				94A07C242E396561009D719E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		94A07C272E396561009D719E /* Build configuration list for PBXNativeTarget "rortiz_RunnersDelightTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				94A07C282E396561009D719E /* Debug */,
+				94A07C292E396561009D719E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		94A07C2A2E396561009D719E /* Build configuration list for PBXNativeTarget "rortiz_RunnersDelightUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				94A07C2B2E396561009D719E /* Debug */,
+				94A07C2C2E396561009D719E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 94A07BF32E39655D009D719E /* Project object */;
+}
