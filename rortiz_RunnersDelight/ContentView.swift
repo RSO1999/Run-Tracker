@@ -1,6 +1,6 @@
 
 // filename: ContentView.swift
-
+// 
 import SwiftUI
 import SwiftData
 import CoreLocation
