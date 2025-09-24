@@ -1,5 +1,7 @@
 # Runner's Delight 🏃‍♂️
 
+⚠️ Work in Progress - This project is currently under active development.
+
 A native iOS running tracker app built with SwiftUI, featuring real-time GPS tracking, live run metrics, and persistent data storage.
 
 ## Features
@@ -36,6 +38,8 @@ RunLog               // SwiftData model for persistent storage
 ```
 
 ## Demo
+
+<img width="372" height="782" alt="Screenshot 2025-09-24 at 1 47 14 PM" src="https://github.com/user-attachments/assets/457cc3c0-e9d4-47ce-bcce-6656b030c15c" />
 
 https://github.com/user-attachments/assets/d15331dc-278c-4d11-a2be-9e2340fde6fd
 
