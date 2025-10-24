@@ -1,4 +1,3 @@
-
 import Foundation
 import CoreLocation
 import SwiftUI
@@ -12,40 +11,34 @@ class RunService: ObservableObject {
     
     deinit {
         print("[RunService \(instanceID)] ❌ DEINIT")
-
     }
 
     // All live run metrics are in the LiveRunData model.
     @Published var liveRunData = LiveRunData()
     
-    // These properties are essential for the internal
-    // logic of the ViewModel to calculate distances.
-    @Published var currentLocation: CLLocation?
-    @Published var previousLocation: CLLocation?
-    @Published var initialLocation: CLLocation?
-        
+
+    private var currentLocation: CLLocation?
+    private var previousLocation: CLLocation?
+    private var currentRouteSegment: Int = 0
+    
     private var startTime: Date?
+    private var accumulatedTime: TimeInterval = 0.0 // Holds elapsed time during pauses
+    private var timerCancellable: AnyCancellable?
     
     private var cancellables = Set<AnyCancellable>()
     
-    private var timerCancellable: AnyCancellable?
+    @Published var isPaused: Bool = false
     
     weak var locationDataManager: LocationDataManager?
     
-    
     init(locationDataManager: LocationDataManager) {
         self.locationDataManager = locationDataManager
-        
         self.instanceID = String(UUID().uuidString.prefix(4)).uppercased()
-        
         print("[RunService \(instanceID)] ✅ INIT")
-        
         subscribeToLocationUpdates(from: locationDataManager)
     }
     
-    
     private func subscribeToLocationUpdates(from locationDataManager: LocationDataManager) {
-                
         guard !isSubscribedToLocation else {
             print("[RunService \(instanceID)] ⚠️ Attempted to re-subscribe. Ignoring.")
             return
@@ -53,42 +46,39 @@ class RunService: ObservableObject {
         isSubscribedToLocation = true
         print("[RunService \(instanceID)] 🚀 Subscribing to location updates.")
         
-        let milesConversion = 2.23694
         
         locationDataManager.$rawLocation
             .compactMap { $0 }
             .sink { [weak self] location in
                 guard let self = self else { return }
                 
-                // update the current location
-                self.currentLocation = location
-                
-                // MARK: TRACKING LOGIC
-                
-                // 1. Check for previous location. This is the first
-                //    update. Set the previous location and wait for the next update.
-                guard self.previousLocation != nil else {
-                    self.previousLocation = location
-                    return // Exits early and doesnt track distance yet.
-                }
-                
-                // 2. Executes only if we have both a current and previous location.
-                //    Safe to track distance.
-                self.trackDistance()
-                
+                if !isPaused{
+                    
+                    self.currentLocation = location
+                    
+                    guard self.previousLocation != nil else {
+                        self.previousLocation = location
+                        return
+                        
+                    }
 
-                // 3. Update properties on the liveRunData model object
-                if location.speed >= 0 {
-                    self.liveRunData.speed = location.speed * milesConversion
-                } else {
-                    self.liveRunData.speed = 0
+                    // Safely get the last segment index
+                    let lastSegmentIndex = max(0, self.liveRunData.routeSegments.count - 1)
+                    // Correct - access the coordinates array inside the RouteSegment
+                    self.liveRunData.routeSegments[lastSegmentIndex].coordinates.append(location.coordinate)
+
+       
+                    self.trackDistance()
                 }
+                
+    
+                self.liveRunData.speedMetersPerSecond = location.speed
                 self.liveRunData.speedAccuracy = location.speedAccuracy
                 self.liveRunData.altitude = location.altitude
                 self.liveRunData.course = location.course
                 self.liveRunData.courseAccuracy = location.courseAccuracy
             }
-            .store(in: &cancellables)
+            .store(in: &cancellables) // This will now compile
     }
     
     func trackDistance() {
@@ -97,63 +87,64 @@ class RunService: ObservableObject {
             print("Waiting for Location Data")
             return
         }
-        
         let changeInDistance = current.distance(from: previous)
-        // Update the distanceMoved property on the model
-        self.liveRunData.distanceMoved += changeInDistance
+        self.liveRunData.distanceMovedMeters += changeInDistance
         self.previousLocation = current
         
-        // Print with the formatted logger
-        logDistance(self.liveRunData.distanceMoved)
     }
-    
     
 
-    private func logDistance(_ total: CLLocationDistance) {
-        // For streamlined and informative debugging
-        // Format: "[RunService A4B1] totalDistance=55.5728"
-        print("[RunService \(instanceID)] totalDistance=\(String(format: "%.4f", total))")
-    }
-    
-    
     
     func startTimer() {
-        
         startTime = Date()
-        
-        let publisher = Timer.publish(every: 0.05, tolerance: nil, on: .main, in: .default)
+        timerCancellable = Timer.publish(every: 0.1, on: .main, in: .common)
             .autoconnect()
-        
-        timerCancellable = publisher.sink { [weak self] newTime in
-            guard let self = self, let start = self.startTime else { return }
-
-            self.liveRunData.elapsedTime = newTime.timeIntervalSince(start)
-        }
-        
+            .sink { [weak self] newTime in
+                guard let self = self, let start = self.startTime else { return }
+                // Add the new interval to the already accumulated time
+                self.liveRunData.durationInSeconds = self.accumulatedTime + newTime.timeIntervalSince(start)
+            }
     }
-    func stopTimer(){
 
-        
+    func stopTimer() {
+        // Calculate the time passed since the timer started and add it to our total
+        if let start = startTime {
+            accumulatedTime += Date().timeIntervalSince(start)
+        }
+        // Cancel the timer and reset the start time
         timerCancellable?.cancel()
         timerCancellable = nil
         startTime = nil
-        print(self.liveRunData.elapsedTime)
-        
+        print("Timer stopped. Accumulated time is \(accumulatedTime)")
     }
+    
     func deinitalizeRunService() {
-
         stopTimer()
-        
-        // Cancel all Combine subscriptions
-        cancellables.forEach { $0.cancel() }
-        cancellables.removeAll()
-        
-        // Reset subscription flag
+        cancellables.forEach { $0.cancel() } // This will now compile
+        cancellables.removeAll() // This will now compile
         isSubscribedToLocation = false
-        
-        // Clear location references
         currentLocation = nil
         previousLocation = nil
-        initialLocation = nil
     }
+    
+    func togglePause() {
+        isPaused.toggle()
+        
+        if isPaused {
+            // Actions to perform when pausing
+            self.previousLocation = nil
+            stopTimer()
+            print("⏸️ Run paused")
+        } else {
+            // Actions to perform when resuming
+            startTimer()
+            liveRunData.routeSegments.append(RouteSegment())
+            print("▶️ Run resumed")
+        }
+    }
+
+    
+
+
+   
 }

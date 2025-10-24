@@ -1,3 +1,5 @@
+
+
 // filename: RunLog.swift
 
 import Foundation
@@ -17,4 +19,6 @@ import SwiftData
         self.duration = duration
         self.timestamp = timestamp
     }
+     
+     
 }

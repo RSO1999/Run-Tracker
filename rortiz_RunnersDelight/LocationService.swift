@@ -10,14 +10,8 @@ class LocationDataManager: ObservableObject {
     private let locationDataManager = CLLocationManager()
     
     // OBSERVER
-    @Published var rawLocation: CLLocation? {
-        
-        didSet {
-            // This will print every time a new location is received from Core Location
-            // before it even gets to RunService.
-            print("[LocationDataManager] 📍 Published new location: \(rawLocation?.coordinate.latitude ?? 0), \(rawLocation?.coordinate.longitude ?? 0)")
-        }
-    }
+    @Published var rawLocation: CLLocation?
+    
     init() {
         configureLocationManager()
         startLiveUpdates()

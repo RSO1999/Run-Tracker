@@ -4,103 +4,144 @@ import MapKit
 
 struct HomeView: View {
     @EnvironmentObject var locationDataManager: LocationDataManager
-    
-    // Optional RunService - nil when not running, created when user starts
     @State private var runService: RunService?
-
-    @State private var isRunning = false
     
     @State private var cameraPosition: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
-    // State to hold the coordinates for drawing the user's path.
-    @State private var runCoordinates: [CLLocationCoordinate2D] = []
-    
+    //@State private var runCoordinates: [CLLocationCoordinate2D] = []
     @Environment(\.modelContext) var modelContext
 
     var body: some View {
         ZStack {
-            Map(position: $cameraPosition) {
-                UserAnnotation {
-                    Image(systemName: "figure.run")
-                        .font(.largeTitle)
-                        // Primary brand color for the runner icon.
-                        .foregroundStyle(Color.brandPrimary)
-                        .shadow(radius: 4)
+                
+                
+                // MARK: - Map View
+                Map(position: $cameraPosition) {
+                    UserAnnotation {
+                        Image(systemName: "figure.run")
+                            .font(.largeTitle)
+                            .foregroundStyle(Color.brandPrimary)
+                            .shadow(radius: 4)
+                    }
+                    // Draw all route segments - now with stable IDs!
+                    if let runService = runService {
+                        ForEach(runService.liveRunData.routeSegments) { segment in
+                            if segment.coordinates.count >= 2 {
+                                MapPolyline(coordinates: segment.coordinates, contourStyle: .geodesic)
+                                    .stroke(Color.brandPrimary, lineWidth: 3)
+                            }
+                        }
+                    }
                 }
-                if isRunning && runCoordinates.count >= 2{
-                    MapPolyline(coordinates: runCoordinates, contourStyle: .geodesic)
-                        .stroke(Color.brandPrimary, lineWidth: 3)
-                }
-            }
-            .mapStyle(.standard)
-            .ignoresSafeArea()
 
+                .mapStyle(.standard)
+                .ignoresSafeArea()
+            
+            
+            // MARK: - Main UI Container
             VStack {
                 Spacer()
 
-                VStack(spacing: 15) {
-                    if let runService = runService {
+                // This is the single, powerful unwrap you wanted.
+                // The entire UI card and all its logic will only exist
+                // when runService is not nil.
+                if let runService = runService {
+                    VStack(spacing: 15) {
+                        // --- Live Data Display ---
                         VStack(spacing: 5) {
                             Text("Live Run Data")
                                 .font(.headline.bold())
-                            Text(String(format: "Speed: %.2f mph", runService.liveRunData.speed))
-                            Text(String(format: "Distance: %.2f miles", runService.liveRunData.distanceMoved / 1609.34))
-                            Text(String(format: "Time: %.1f seconds", runService.liveRunData.elapsedTime))
+                            Text("Duration: \(Duration.seconds(runService.liveRunData.durationInSeconds).formatted(.time(pattern: .hourMinuteSecond)))")
+                            Text("Pace: \(runService.liveRunData.currentPaceInMinutesPerMile, specifier: "%.2f") min/mi")
+                            Text("Distance: \(runService.liveRunData.distanceMovedMiles, specifier: "%.2f") miles")
                         }
                         .font(.subheadline)
-                    } else {
+                        
+                        // --- Action Buttons ---
+                        HStack {
+                            // Since we are inside the 'if let', we know runService is not nil.
+                            // This simplifies the Stop button.
+                            Button("Stop") {
+                                stopRun()
+                            }
+                            .font(.title2.bold())
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.red.opacity(0.8))
+                            .foregroundColor(.white)
+                            .cornerRadius(15)
+                            
+                            // The Pause button also knows runService is not nil.
+                            Button(runService.isPaused ? "Resume" : "Pause") {
+                                runService.togglePause()
+                            }
+                            .font(.title2.bold())
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.orange.opacity(0.8))
+                            .foregroundColor(.white)
+                            .cornerRadius(15)
+                        }
+                    }
+
+                    .foregroundStyle(Color.charcoal)
+                    .padding(20)
+                    .background(Color.lightGrey)
+                    .cornerRadius(20)
+                    .shadow(color: .charcoal.opacity(0.3), radius: 10)
+                    .padding(.horizontal)
+                    .padding(.bottom, 20)
+                    
+                } else {
+                    // MARK: --- UI when NO run is active ---
+                    // This is the "Start Run" button, which has its own simple card.
+                    VStack(spacing: 15) {
                         Text("Ready to run!")
                             .font(.headline.bold())
+                        
+                        Button("Start Run") {
+                            startRun()
+                        }
+                        .font(.title2.bold())
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.brandPrimary)
+                        .foregroundColor(.white)
+                        .cornerRadius(15)
                     }
-                    
-                    Button(isRunning ? "Stop Run" : "Start Run") {
-                        isRunning ? stopRun() : startRun()
-                    }
-                    .font(.title2.bold())
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    // theme colors for the button's background.
-                    .background(isRunning ? Color.charcoal : Color.brandPrimary)
-                    .foregroundColor(.white) // White text for buttons.
-                    .cornerRadius(15)
+                    .foregroundStyle(Color.charcoal)
+                    .padding(20)
+                    .background(Color.lightGrey)
+                    .cornerRadius(20)
+                    .shadow(color: .charcoal.opacity(0.3), radius: 10)
+                    .padding(.horizontal)
+                    .padding(.bottom, 20)
                 }
-                .onChange(of: locationDataManager.rawLocation) { _, newLocation in
-                    if isRunning, let coordinate = newLocation?.coordinate { runCoordinates.append(coordinate) }
-                }
-                // Apply theme colors to the entire UI card.
-                .foregroundStyle(Color.charcoal) // All text inside will be charcoal.
-                .padding(20)
-                .background(Color.lightGrey) // light grey for the card background.
-                .cornerRadius(20)
-                .shadow(color: .charcoal.opacity(0.3), radius: 10) // charcoal for shadow.
-                .padding(.horizontal)
-                .padding(.bottom, 20)
             }
         }
     }
-    
     private func startRun() {
         runService = RunService(locationDataManager: locationDataManager)
         runService?.startTimer()
         
-        // Clear previous coordinates and add initial location if available
-        runCoordinates.removeAll()
+        // Add initial location to the first segment if available
         if let initialLocation = locationDataManager.rawLocation?.coordinate {
-            runCoordinates.append(initialLocation)
+            runService?.liveRunData.routeSegments[0].coordinates.append(initialLocation)
         }
 
-        isRunning = true
+
         print("🟢 Run started")
     }
     
     private func stopRun() {
-        let newRunData = RunLog(distance: runService?.liveRunData.distanceMoved ?? 0.0, duration: runService?.liveRunData.elapsedTime ?? 0.0, timestamp: Date())
+        let newRunData = RunLog(distance: runService?.liveRunData.distanceMovedMiles ?? 0.0, duration: runService?.liveRunData.durationInSeconds ?? 0.0, timestamp: Date())
         modelContext.insert(newRunData)
         
         runService?.stopTimer()
         runService?.deinitalizeRunService()
         runService = nil
-        isRunning = false
         print("🔴 Run stopped")
     }
+
 }
+
 
