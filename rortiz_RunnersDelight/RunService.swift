@@ -13,7 +13,6 @@ class RunService: ObservableObject {
         print("[RunService \(instanceID)] ❌ DEINIT")
     }
 
-    // All live run metrics are in the LiveRunData model.
     @Published var liveRunData = LiveRunData()
     
 
@@ -22,7 +21,7 @@ class RunService: ObservableObject {
     private var currentRouteSegment: Int = 0
     
     private var startTime: Date?
-    private var accumulatedTime: TimeInterval = 0.0 // Holds elapsed time during pauses
+    private var accumulatedTime: TimeInterval = 0.0
     private var timerCancellable: AnyCancellable?
     
     private var cancellables = Set<AnyCancellable>()
@@ -62,9 +61,7 @@ class RunService: ObservableObject {
                         
                     }
 
-                    // Safely get the last segment index
                     let lastSegmentIndex = max(0, self.liveRunData.routeSegments.count - 1)
-                    // Correct - access the coordinates array inside the RouteSegment
                     self.liveRunData.routeSegments[lastSegmentIndex].coordinates.append(location.coordinate)
 
        
@@ -78,7 +75,7 @@ class RunService: ObservableObject {
                 self.liveRunData.course = location.course
                 self.liveRunData.courseAccuracy = location.courseAccuracy
             }
-            .store(in: &cancellables) // This will now compile
+            .store(in: &cancellables)
     }
     
     func trackDistance() {
@@ -101,17 +98,15 @@ class RunService: ObservableObject {
             .autoconnect()
             .sink { [weak self] newTime in
                 guard let self = self, let start = self.startTime else { return }
-                // Add the new interval to the already accumulated time
+                
                 self.liveRunData.durationInSeconds = self.accumulatedTime + newTime.timeIntervalSince(start)
             }
     }
 
     func stopTimer() {
-        // Calculate the time passed since the timer started and add it to our total
         if let start = startTime {
             accumulatedTime += Date().timeIntervalSince(start)
         }
-        // Cancel the timer and reset the start time
         timerCancellable?.cancel()
         timerCancellable = nil
         startTime = nil
@@ -120,8 +115,8 @@ class RunService: ObservableObject {
     
     func deinitalizeRunService() {
         stopTimer()
-        cancellables.forEach { $0.cancel() } // This will now compile
-        cancellables.removeAll() // This will now compile
+        cancellables.forEach { $0.cancel() }
+        cancellables.removeAll()
         isSubscribedToLocation = false
         currentLocation = nil
         previousLocation = nil
@@ -131,12 +126,10 @@ class RunService: ObservableObject {
         isPaused.toggle()
         
         if isPaused {
-            // Actions to perform when pausing
             self.previousLocation = nil
             stopTimer()
             print("⏸️ Run paused")
         } else {
-            // Actions to perform when resuming
             startTimer()
             liveRunData.routeSegments.append(RouteSegment())
             print("▶️ Run resumed")

@@ -1,16 +1,14 @@
 
-
 // filename: LiveRunData.swift
+
 import Foundation
 import CoreLocation
 
-/// A single segment of a run route (between pauses)
 struct RouteSegment: Identifiable {
     let id = UUID()
     var coordinates: [CLLocationCoordinate2D] = []
 }
 
-/// A model to hold all the live metrics of an active run.
 struct LiveRunData {
     var speedMetersPerSecond: CLLocationSpeed = 0.0
     var speedAccuracy: CLLocationDirectionAccuracy = 0
@@ -45,9 +43,7 @@ struct LiveRunData {
     
 
 }
-// MARK: - Helper Types & Extensions
 
-/// Conformance to Hashable to allow SwiftUI's ForEach to uniquely identify coordinate arrays.
 extension CLLocationCoordinate2D: Hashable {
     public static func == (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
         return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude

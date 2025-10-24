@@ -36,7 +36,6 @@ final class HealthKitManager: ObservableObject, @unchecked Sendable {
     
     init() {}
     
-    // MARK: - Authorization
     
     func requestAuthorization() async throws {
         guard HKHealthStore.isHealthDataAvailable() else {
@@ -47,7 +46,6 @@ final class HealthKitManager: ObservableObject, @unchecked Sendable {
         try await healthStore.requestAuthorization(toShare: typesToShare, read: [])
     }
     
-    // MARK: - Workout Saving
     
     func saveRunWorkout(
         route: [CLLocation],
@@ -70,7 +68,6 @@ final class HealthKitManager: ObservableObject, @unchecked Sendable {
         do {
             try await builder.beginCollection(at: startDate)
             
-            // Add distance sample
             let distanceQuantity = HKQuantity(unit: .mile(), doubleValue: distanceInMiles)
             let distanceSample = HKQuantitySample(
                 type: HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)!,
@@ -82,15 +79,12 @@ final class HealthKitManager: ObservableObject, @unchecked Sendable {
             
             try await builder.endCollection(at: endDate)
             
-            // Finish workout - returns HKWorkout?
             let workout = try await builder.finishWorkout()
             
-            // Unwrap the optional
             guard let finishedWorkout = workout else {
                 throw HealthKitError.workoutSaveFailed("Workout was not created")
             }
             
-            // Add route if available
             if !route.isEmpty {
                 try await saveRoute(route, to: finishedWorkout)
             }

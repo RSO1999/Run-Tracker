@@ -5,7 +5,6 @@
 import Foundation
 import SwiftData
 
-/// A SwiftData Model to persist a completed run's summary.
 @Model
  final class RunLog: Identifiable {
     var id: UUID

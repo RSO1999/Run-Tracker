@@ -7,14 +7,12 @@ struct HomeView: View {
     @State private var runService: RunService?
     
     @State private var cameraPosition: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
-    //@State private var runCoordinates: [CLLocationCoordinate2D] = []
     @Environment(\.modelContext) var modelContext
 
     var body: some View {
         ZStack {
                 
                 
-                // MARK: - Map View
                 Map(position: $cameraPosition) {
                     UserAnnotation {
                         Image(systemName: "figure.run")
@@ -22,7 +20,6 @@ struct HomeView: View {
                             .foregroundStyle(Color.brandPrimary)
                             .shadow(radius: 4)
                     }
-                    // Draw all route segments - now with stable IDs!
                     if let runService = runService {
                         ForEach(runService.liveRunData.routeSegments) { segment in
                             if segment.coordinates.count >= 2 {
@@ -37,16 +34,12 @@ struct HomeView: View {
                 .ignoresSafeArea()
             
             
-            // MARK: - Main UI Container
             VStack {
                 Spacer()
 
-                // This is the single, powerful unwrap you wanted.
-                // The entire UI card and all its logic will only exist
-                // when runService is not nil.
+
                 if let runService = runService {
                     VStack(spacing: 15) {
-                        // --- Live Data Display ---
                         VStack(spacing: 5) {
                             Text("Live Run Data")
                                 .font(.headline.bold())
@@ -56,10 +49,8 @@ struct HomeView: View {
                         }
                         .font(.subheadline)
                         
-                        // --- Action Buttons ---
                         HStack {
-                            // Since we are inside the 'if let', we know runService is not nil.
-                            // This simplifies the Stop button.
+                
                             Button("Stop") {
                                 stopRun()
                             }
@@ -70,7 +61,6 @@ struct HomeView: View {
                             .foregroundColor(.white)
                             .cornerRadius(15)
                             
-                            // The Pause button also knows runService is not nil.
                             Button(runService.isPaused ? "Resume" : "Pause") {
                                 runService.togglePause()
                             }
@@ -92,8 +82,7 @@ struct HomeView: View {
                     .padding(.bottom, 20)
                     
                 } else {
-                    // MARK: --- UI when NO run is active ---
-                    // This is the "Start Run" button, which has its own simple card.
+                  
                     VStack(spacing: 15) {
                         Text("Ready to run!")
                             .font(.headline.bold())
@@ -123,7 +112,6 @@ struct HomeView: View {
         runService = RunService(locationDataManager: locationDataManager)
         runService?.startTimer()
         
-        // Add initial location to the first segment if available
         if let initialLocation = locationDataManager.rawLocation?.coordinate {
             runService?.liveRunData.routeSegments[0].coordinates.append(initialLocation)
         }

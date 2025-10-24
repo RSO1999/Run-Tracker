@@ -39,8 +39,7 @@ struct ContentView: View {
                 ProfileView()
             }
         }
-        // The modifier is attached to the TabView making the LocationDataManager
-        // object available to all the views in TabView.
+        
         .environmentObject(manager)
     }
 }

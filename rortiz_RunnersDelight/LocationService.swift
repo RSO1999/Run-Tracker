@@ -9,7 +9,6 @@ class LocationDataManager: ObservableObject {
     
     private let locationDataManager = CLLocationManager()
     
-    // OBSERVER
     @Published var rawLocation: CLLocation?
     
     init() {
@@ -17,7 +16,6 @@ class LocationDataManager: ObservableObject {
         startLiveUpdates()
     }
 
-    // Configuration Function
     private func configureLocationManager() {
         if locationDataManager.authorizationStatus == .notDetermined {
             locationDataManager.requestWhenInUseAuthorization()
@@ -27,7 +25,6 @@ class LocationDataManager: ObservableObject {
         locationDataManager.distanceFilter = kCLDistanceFilterNone
     }
 
-    // Getting Live Updates
     private func startLiveUpdates() {
         Task {
             do {
