@@ -18,6 +18,11 @@ struct LiveRunData {
     var distanceMovedMeters: CLLocationDistance = 0.0
     var durationInSeconds: Double = 0.0
     var routeSegments: [RouteSegment] = [RouteSegment()]
+    
+    // NEW: Add properties for motion data
+    var stepCount: Int = 0
+    var cadence: Double = 0.0 // Steps per minute
+    
 
     var currentPaceInSecondsPerMile: Double {
         guard speedMetersPerSecond > 0.1 else{

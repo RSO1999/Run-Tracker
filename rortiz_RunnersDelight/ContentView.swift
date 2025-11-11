@@ -8,38 +8,28 @@ import CoreLocation
 struct ContentView: View {
     @StateObject private var manager = LocationDataManager()
     
-    @State private var selection: String = "Home"
-
-    
-    init() {
-        print("[CV] ✅ ContentView INIT")
-    }
+    @State private var selection: Int = 0  // Use Int or enum for selection
 
     var body: some View {
-        
         TabView(selection: $selection) {
-            Tab("Home",
-                systemImage: "figure.run",
-                value: "Home")
-            {
-                HomeView()
-            }
+            HomeView()
+                .tabItem {
+                    Label("Home", systemImage: "figure.run")
+                }
+                .tag(0)
             
-            Tab("History",
-                systemImage: "list.bullet",
-                value: "History")
-            {
-                HistoryView()
-            }
-
-            Tab("Profile",
-                systemImage: "person.crop.circle.fill",
-                value: "Profile")
-            {
-                ProfileView()
-            }
+            HistoryView()
+                .tabItem {
+                    Label("History", systemImage: "list.bullet")
+                }
+                .tag(1)
+            
+            ProfileView()
+                .tabItem {
+                    Label("Profile", systemImage: "person.crop.circle.fill")
+                }
+                .tag(2)
         }
-        
         .environmentObject(manager)
     }
 }

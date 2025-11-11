@@ -1,0 +1,47 @@
+protocol OrderState {
+    func processOrder(order: Order) -> OrderState
+    func cancelOrder(order: Order) -> OrderState
+}
+
+class PendingState: OrderState {
+    func processOrder(order: Order) -> OrderState {
+        print("Processing pending order \(order.id)")
+        return ProcessingState()
+    }
+    func cancelOrder(order: Order) -> OrderState {
+        print("Cancelling pending order \(order.id)")
+        return CancelledState()
+    }
+}
+
+class ProcessingState: OrderState {
+    func processOrder(order: Order) -> OrderState {
+        print("Order \(order.id) already in processing.")
+        return self
+    }
+    func cancelOrder(order: Order) -> OrderState {
+        print("Cannot cancel order \(order.id) while processing.")
+        return self
+    }
+}
+
+// ... other states like CompletedState, CancelledState
+
+class Order {
+    let id: String
+    var state: OrderState
+
+    init(id: String) {
+        self.id = id
+        self.state = PendingState() // Initial state
+    }
+
+    func process() {
+        state = state.processOrder(order: self)
+    }
+
+    func cancel() {
+        state = state.cancelOrder(order: self)
+    }
+}
+
