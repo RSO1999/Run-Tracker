@@ -14,17 +14,17 @@ class RunService: ObservableObject {
     deinit {
         print("[RunService \(instanceID)] ❌ DEINIT")
     }
-
+    
     @Published var liveRunData = LiveRunData()
     
-
+    
     private var currentLocation: CLLocation?
     private var previousLocation: CLLocation?
     
     private var timerCancellable: AnyCancellable?
     
     private var cancellables = Set<AnyCancellable>()
-    
+
     @Published private(set) var state: WorkoutState = .inactive
     
     weak var locationDataManager: LocationDataManager?
@@ -33,15 +33,18 @@ class RunService: ObservableObject {
         self.locationDataManager = locationDataManager
         self.instanceID = String(UUID().uuidString.prefix(4)).uppercased()
         
-
+        
         print("[RunService \(instanceID)] ✅ INIT")
+        
         subscribeToLocationUpdates(from: locationDataManager)
         
-
+        
+        
     }
     
-    private func subscribeToLocationUpdates(from locationDataManager: LocationDataManager) {
 
+    private func subscribeToLocationUpdates(from locationDataManager: LocationDataManager) {
+        
         print("[RunService \(instanceID)] 🚀 Subscribing to location updates.")
         
         locationDataManager.$rawLocation
@@ -55,7 +58,7 @@ class RunService: ObservableObject {
                 guard self.isLocationValid(location) else {
                     return
                 }
-
+                
                 
                 self.currentLocation = location
                 self.liveRunData.speedMetersPerSecond = location.speed
@@ -72,30 +75,54 @@ class RunService: ObservableObject {
     // MARK: FILTERS - Implement Adaptive Filtering Later
     
     private func isLocationValid(_ location: CLLocation) -> Bool {
-        // 1. The Timestamp Check: Reject old, cached locations.
-        // A location timestamp more than 5 seconds in the past is likely a cached value
-        // that the system is providing before it gets a fresh fix.
+
         guard location.timestamp.timeIntervalSinceNow > -5 else {
             print("🗑️ Discarded location: Too old (\(location.timestamp.timeIntervalSinceNow)s).")
             return false
         }
 
-        // 2. The Accuracy Check: Reject invalid or wildly imprecise locations.
-        // A negative accuracy means the location is invalid.
-        // We'll use a threshold of 70 meters as our maximum acceptable accuracy for a run.
         guard location.horizontalAccuracy >= 0 && location.horizontalAccuracy <= 70 else {
             print("🗑️ Discarded location: Inaccurate (\(location.horizontalAccuracy)m).")
             return false
         }
         
-
-        // If both checks pass, the location is considered valid for now.
+        if let previous = previousLocation {
+            let distance = location.distance(from: previous)
+            let timeInterval = location.timestamp.timeIntervalSince(previous.timestamp)
+            
+            guard timeInterval > 0 else {
+                print("🗑️ Discarded: Zero time interval")
+                return false
+            }
+            
+            let calculatedSpeed = distance / timeInterval
+            
+        
+            let maxHumanSpeed: Double = 15.0
+            
+            guard calculatedSpeed <= maxHumanSpeed else {
+                print("🗑️ Discarded: Impossible speed (\(String(format: "%.1f", calculatedSpeed)) m/s, \(String(format: "%.1f", calculatedSpeed * 2.237)) mph)")
+                return false
+            }
+            
+            if location.speedAccuracy >= 0 && location.speed >= 0 {
+                let appleSpeed = location.speed
+                let speedDifference = abs(calculatedSpeed - appleSpeed)
+                let averageSpeed = (calculatedSpeed + appleSpeed) / 2.0
+                
+                if averageSpeed > 0 && speedDifference / averageSpeed > 1.0 {
+                    print("🗑️ Discarded: Speed mismatch (calc: \(String(format: "%.1f", calculatedSpeed)) m/s, Apple: \(String(format: "%.1f", appleSpeed)) m/s)")
+                    return false
+                }
+            }
+        }
         return true
     }
-
+    
     private func processState(for location: CLLocation) {
         switch state {
         case .running:
+
             guard previousLocation != nil else {
                 previousLocation = location
                 
@@ -128,10 +155,9 @@ class RunService: ObservableObject {
         self.previousLocation = current
         
     }
-
+    
     private func startDurationTimer() {
         
-        // Add this check and print statement
         if timerCancellable != nil {
             print("‼️ [RunService \(instanceID)] TIMER WARNING: A timer already exists. This should not happen.")
         }
@@ -160,35 +186,40 @@ class RunService: ObservableObject {
     private func stopDurationTimer() {
         
         print("⌛️ [RunService \(instanceID)] Stopping duration timer.")
-
+        
         timerCancellable?.cancel()
         timerCancellable = nil
     }
     
-
     func start() {
         guard case .inactive = state else {
             print("⚠️ RunService: Attempted to start a run that was not inactive.")
             return
         }
+        locationDataManager?.state = .highPower
+        locationDataManager?.handleLocationStates()
         
         state = .running(startTime: Date(), accumulatedTime: 0)
         
         startDurationTimer()
+        
         print("▶️ RunService: Run started.")
     }
-
+    
     func pause() {
+        // This guard ensures we only pause a currently running workout.
         guard case .running(let startTime, let accumulatedTime) = state else {
             print("⚠️ RunService: Attempted to pause a run that was not running.")
             return
         }
+        
         let newAccumulatedTime = accumulatedTime + Date().timeIntervalSince(startTime)
         state = .paused(accumulatedTime: newAccumulatedTime)
         
+        
         print("⏸️ RunService: Run paused.")
     }
-
+    
     func resume() {
         guard case .paused(let accumulatedTime) = state else {
             print("⚠️ RunService: Attempted to resume a run that was not paused.")
@@ -202,33 +233,31 @@ class RunService: ObservableObject {
         print("▶️ RunService: Run resumed.")
     }
     
-    // In RunService.swift, replace the end() method.
-
     func end() {
-        // We switch on the state to handle all cases correctly.
+
         switch state {
         case .running(let startTime, let accumulatedTime):
-            // If the run is stopped while running, we must do one final calculation
-            // to capture the duration of the last segment.
             let finalDuration = accumulatedTime + Date().timeIntervalSince(startTime)
             self.liveRunData.durationInSeconds = finalDuration
             print("⏹️ RunService: Final duration calculated from running state: \(finalDuration)")
             
         case .paused(let accumulatedTime):
-            // If stopped while paused, the accumulated time is already the final duration.
             self.liveRunData.durationInSeconds = accumulatedTime
             print("⏹️ RunService: Final duration is paused time: \(accumulatedTime)")
             
         case .inactive:
-            // If already inactive, do nothing.
             print("⚠️ RunService: Attempted to end a run that was already inactive.")
             return
         }
         
-        // --- Perform all cleanup AFTER the final calculation ---
         
         stopDurationTimer()
+        
         state = .inactive
+        
+        locationDataManager?.state = .lowPower
+        locationDataManager?.handleLocationStates()
+        
         cancellables.forEach { $0.cancel() }
         cancellables.removeAll()
         currentLocation = nil

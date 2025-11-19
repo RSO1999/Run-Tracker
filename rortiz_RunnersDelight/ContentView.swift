@@ -8,8 +8,7 @@ import CoreLocation
 struct ContentView: View {
     @StateObject private var manager = LocationDataManager()
     
-    @State private var selection: Int = 0  // Use Int or enum for selection
-
+    @State private var selection: Int = 0  
     var body: some View {
         TabView(selection: $selection) {
             HomeView()
