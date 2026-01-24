@@ -5,6 +5,8 @@ import Foundation
 import CoreLocation
 import SwiftUI
 import Combine
+import SwiftData
+
 
 @MainActor
 class RunService: ObservableObject {
@@ -16,6 +18,12 @@ class RunService: ObservableObject {
     }
     
     @Published var liveRunData = LiveRunData()
+    
+    // Data Collection
+    private var samples: [RunSample] = []
+    private var lastSampleTime: Date?
+    private let sampleInterval: TimeInterval = 1.0
+
     
     
     private var currentLocation: CLLocation?
@@ -66,7 +74,7 @@ class RunService: ObservableObject {
                 self.liveRunData.altitude = location.altitude
                 self.liveRunData.course = location.course
                 self.liveRunData.courseAccuracy = location.courseAccuracy
-                
+              
                 self.processState(for: location)
             }
             .store(in: &cancellables)
@@ -119,6 +127,58 @@ class RunService: ObservableObject {
         return true
     }
     
+    private func recordSampleIfNeeded() {
+        let now = Date()
+
+        if let last = lastSampleTime,
+           now.timeIntervalSince(last) < sampleInterval {
+            return
+        }
+
+        lastSampleTime = now
+
+        let sample = RunSample(
+            sampleIndex: samples.count,
+            timeOffsetSeconds: liveRunData.durationInSeconds,
+            distanceMiles: liveRunData.distanceMovedMiles,
+            speedMetersPerSecond: liveRunData.speedMetersPerSecond,
+            paceMinPerMile: liveRunData.currentPaceInMinutesPerMile,
+            altitudeFeet: (currentLocation?.altitude ?? 0) * 3.28084,
+            run: nil
+        )
+
+        samples.append(sample)
+    }
+    func saveRun(context: ModelContext) {
+        let run = RunLog(
+            startDate: Date().addingTimeInterval(-liveRunData.durationInSeconds),
+            endDate: Date(),
+            totalDistanceMiles: liveRunData.distanceMovedMiles,
+            totalDurationSeconds: liveRunData.durationInSeconds,
+            averagePaceMinPerMile: liveRunData.averagePaceInMinutesPerMile,
+            elevationGainFeet: 0,   // can compute later
+            elevationLossFeet: 0,
+            movingTimeSeconds: liveRunData.durationInSeconds,
+            pausedTimeSeconds: 0
+        )
+
+        // Attach samples
+        for sample in samples {
+            sample.run = run
+        }
+
+        context.insert(run)
+
+        print("✅ Run saved with \(samples.count) samples")
+        print("Samples saved: \(samples.count)")
+        print("Distance: \(liveRunData.distanceMovedMiles)")
+        print("Duration: \(liveRunData.durationInSeconds)")
+
+    }
+
+
+
+    
     private func processState(for location: CLLocation) {
         switch state {
         case .running:
@@ -134,7 +194,10 @@ class RunService: ObservableObject {
             let lastSegmentIndex = max(0, liveRunData.routeSegments.count - 1)
             liveRunData.routeSegments[lastSegmentIndex].coordinates.append(location.coordinate)
             
+
+            
             trackDistance()
+            recordSampleIfNeeded()
             
         case .paused:
             previousLocation = location

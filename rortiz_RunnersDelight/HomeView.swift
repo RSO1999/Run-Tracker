@@ -134,11 +134,14 @@ struct HomeView: View {
         let finalDistance = runService?.liveRunData.distanceMovedMiles ?? 0.0
         let finalDuration = runService?.liveRunData.durationInSeconds ?? 0.0
         
-        let newRunData = RunLog(distance: finalDistance, duration: finalDuration, timestamp: Date())
-        modelContext.insert(newRunData)
-        
+        runService?.saveRun(context: modelContext)
         runService?.end()
-        self.runService = nil
+        runService = nil
+
+        
+        
         print("🔴 Run stopped and saved.")
     }
+    
+
 }

@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		CB3DA11B2F2477C6000B8166 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CB3DA11A2F2477C6000B8166 /* Lottie */; };
+		CB3DA11D2F2477C6000B8166 /* Lottie-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = CB3DA11C2F2477C6000B8166 /* Lottie-Dynamic */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		94A07C102E396561009D719E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -65,6 +70,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB3DA11B2F2477C6000B8166 /* Lottie in Frameworks */,
+				CB3DA11D2F2477C6000B8166 /* Lottie-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +132,8 @@
 			);
 			name = rortiz_RunnersDelight;
 			packageProductDependencies = (
+				CB3DA11A2F2477C6000B8166 /* Lottie */,
+				CB3DA11C2F2477C6000B8166 /* Lottie-Dynamic */,
 			);
 			productName = rortiz_RunnersDelight;
 			productReference = 94A07BFB2E39655D009D719E /* rortiz_RunnersDelight.app */;
@@ -208,6 +217,9 @@
 			);
 			mainGroup = 94A07BF22E39655D009D719E;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				CB3DA1192F2477C6000B8166 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 94A07BFC2E39655D009D719E /* Products */;
 			projectDirPath = "";
@@ -597,6 +609,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CB3DA1192F2477C6000B8166 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CB3DA11A2F2477C6000B8166 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CB3DA1192F2477C6000B8166 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+		CB3DA11C2F2477C6000B8166 /* Lottie-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CB3DA1192F2477C6000B8166 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = "Lottie-Dynamic";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 94A07BF32E39655D009D719E /* Project object */;
 }
