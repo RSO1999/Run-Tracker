@@ -45,8 +45,7 @@ https://github.com/user-attachments/assets/d15331dc-278c-4d11-a2be-9e2340fde6fd
 
 ## Newest Demo (Restyled App, Added Charts, Added Summary Page for Run History)
 
-<img width="403" height="800" alt="Screenshot 2026-02-11 at 1 19 08 AM" src="https://github.com/user-attachments/assets/9887cc19-e167-4ede-abc2-3a89fd027650" />
-
+https://github.com/user-attachments/assets/f82b8733-2bc4-494e-82d4-fe1f5ed8ba49
 
 > **Note:** Demo video is sped up for demonstration purposes and was recorded on iPhone 16 Pro simulator.
 
