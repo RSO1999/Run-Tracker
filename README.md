@@ -43,6 +43,11 @@ RunLog               // SwiftData model for persistent storage
 
 https://github.com/user-attachments/assets/d15331dc-278c-4d11-a2be-9e2340fde6fd
 
+## Newest Demo (Restyled App, Added Charts, Added Summary Page for Run History)
+
+<img width="403" height="800" alt="Screenshot 2026-02-11 at 1 19 08 AM" src="https://github.com/user-attachments/assets/9887cc19-e167-4ede-abc2-3a89fd027650" />
+
+
 > **Note:** Demo video is sped up for demonstration purposes and was recorded on iPhone 16 Pro simulator.
 
 ## Getting Started
